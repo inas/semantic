@@ -1,0 +1,325 @@
+@prefix : <http://www.example.org/onto/TheaterFestival#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.example.org/onto/TheaterFestival> .
+
+<http://www.example.org/onto/TheaterFestival> rdf:type owl:Ontology .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.example.org/onto/TheaterFestival#basedOn
+:basedOn rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Production ;
+         rdfs:range :Play .
+
+
+###  http://www.example.org/onto/TheaterFestival#canBeSeenIn
+:canBeSeenIn rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Play
+                                         :Production
+                                       )
+                         ] ;
+             rdfs:range :Festival .
+
+
+###  http://www.example.org/onto/TheaterFestival#containsAct
+:containsAct rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :Play ;
+             rdfs:range :Act .
+
+
+###  http://www.example.org/onto/TheaterFestival#duringTime
+:duringTime rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :Performance ;
+            rdfs:range :TimePeriod .
+
+
+###  http://www.example.org/onto/TheaterFestival#ensembleMembershipOf
+:ensembleMembershipOf rdf:type owl:ObjectProperty ;
+                      rdfs:subPropertyOf owl:topObjectProperty ;
+                      rdfs:domain :EnsembleMembership ;
+                      rdfs:range :Ensemble .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasEmployer
+:hasEmployer rdf:type owl:ObjectProperty ;
+             rdfs:subPropertyOf owl:topObjectProperty ;
+             rdfs:domain :Employment ;
+             rdfs:range :Theater .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasEmployment
+:hasEmployment rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Actor ;
+               rdfs:range :Employment .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasPremier
+:hasPremier rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :Play ;
+            rdfs:range :Premier .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasProduction
+:hasProduction rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Festival ;
+               rdfs:range :Production .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasRole
+:hasRole rdf:type owl:ObjectProperty ;
+         rdfs:subPropertyOf owl:topObjectProperty ;
+         rdfs:domain :Performance ;
+         rdfs:range :Role .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasStarRating
+:hasStarRating rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Production ;
+               rdfs:range :StarRating .
+
+
+###  http://www.example.org/onto/TheaterFestival#involvedIn
+:involvedIn rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :Ensemble ;
+            rdfs:range :Production .
+
+
+###  http://www.example.org/onto/TheaterFestival#locatedIn
+:locatedIn rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty .
+
+
+###  http://www.example.org/onto/TheaterFestival#memberOf
+:memberOf rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :Person ;
+          rdfs:range :EnsembleMembership .
+
+
+###  http://www.example.org/onto/TheaterFestival#performanceOf
+:performanceOf rdf:type owl:ObjectProperty ;
+               rdfs:subPropertyOf owl:topObjectProperty ;
+               rdfs:domain :Performance ;
+               rdfs:range :Production .
+
+
+###  http://www.example.org/onto/TheaterFestival#performs
+:performs rdf:type owl:ObjectProperty ;
+          rdfs:subPropertyOf owl:topObjectProperty ;
+          rdfs:domain :Actor ;
+          rdfs:range :Performance .
+
+
+###  http://www.example.org/onto/TheaterFestival#providedBy
+:providedBy rdf:type owl:ObjectProperty ;
+            rdfs:subPropertyOf owl:topObjectProperty ;
+            rdfs:domain :StarRating ;
+            rdfs:range :Newspaper .
+
+
+###  http://www.example.org/onto/TheaterFestival#takesPlaceAt
+:takesPlaceAt rdf:type owl:ObjectProperty ;
+              rdfs:subPropertyOf owl:topObjectProperty ;
+              rdfs:domain :Festival ;
+              rdfs:range :Place .
+
+
+###  http://www.example.org/onto/TheaterFestival#writtenBy
+:writtenBy rdf:type owl:ObjectProperty ;
+           rdfs:subPropertyOf owl:topObjectProperty ;
+           rdfs:domain :Play ;
+           rdfs:range :Author .
+
+
+###  http://www.example.org/onto/TheaterFestival#writtenInPeriod
+:writtenInPeriod rdf:type owl:ObjectProperty ;
+                 rdfs:subPropertyOf owl:topObjectProperty ;
+                 rdfs:domain :Play ;
+                 rdfs:range :TimePeriod .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.example.org/onto/TheaterFestival#atDate
+:atDate rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :Premier ;
+        rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/onto/TheaterFestival#atTime
+:atTime rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :EnsembleMembership ;
+        rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/onto/TheaterFestival#endsAt
+:endsAt rdf:type owl:DatatypeProperty ;
+        rdfs:subPropertyOf owl:topDataProperty ;
+        rdfs:domain :TimePeriod ;
+        rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/onto/TheaterFestival#hasValue
+:hasValue rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :StarRating ;
+          rdfs:range xsd:int .
+
+
+###  http://www.example.org/onto/TheaterFestival#startsAt
+:startsAt rdf:type owl:DatatypeProperty ;
+          rdfs:subPropertyOf owl:topDataProperty ;
+          rdfs:domain :TimePeriod ;
+          rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/onto/TheaterFestival#startsFromTime
+:startsFromTime rdf:type owl:DatatypeProperty ;
+                rdfs:subPropertyOf owl:topDataProperty ;
+                rdfs:domain :Employment ;
+                rdfs:range xsd:dateTime .
+
+
+###  http://www.example.org/onto/TheaterFestival#takesPlaceAtTime
+:takesPlaceAtTime rdf:type owl:DatatypeProperty ;
+                  rdfs:subPropertyOf owl:topDataProperty ;
+                  rdfs:domain :Festival ;
+                  rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.example.org/onto/TheaterFestival#Act
+:Act rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Actor
+:Actor rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Author
+:Author rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#City
+:City rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Country
+:Country rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Employment
+:Employment rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Ensemble
+:Ensemble rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#EnsembleMembership
+:EnsembleMembership rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Festival
+:Festival rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#LargeFestival
+:LargeFestival rdf:type owl:Class ;
+               owl:equivalentClass [ owl:intersectionOf ( :Festival
+                                                          [ rdf:type owl:Restriction ;
+                                                            owl:onProperty :hasProduction ;
+                                                            owl:minQualifiedCardinality "4"^^xsd:nonNegativeInteger ;
+                                                            owl:onClass :Production
+                                                          ]
+                                                        ) ;
+                                     rdf:type owl:Class
+                                   ] .
+
+
+###  http://www.example.org/onto/TheaterFestival#Newspaper
+:Newspaper rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Performance
+:Performance rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Person
+:Person rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Place
+:Place rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Play
+:Play rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Premier
+:Premier rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Production
+:Production rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Role
+:Role rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#StarRating
+:StarRating rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#Theater
+:Theater rdf:type owl:Class .
+
+
+###  http://www.example.org/onto/TheaterFestival#TimePeriod
+:TimePeriod rdf:type owl:Class .
+
+
+#################################################################
+#    General axioms
+#################################################################
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty :locatedIn ;
+  owl:someValuesFrom :City ;
+  rdfs:subClassOf :Theater
+] .
+
+
+[ rdf:type owl:Restriction ;
+  owl:onProperty :locatedIn ;
+  owl:someValuesFrom :Country ;
+  rdfs:subClassOf :City
+] .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
