@@ -416,6 +416,7 @@ NPM: Anisha Inas Izdihar""" .
                                                   :Dissertation ;
                                          :affiliatedTo :Criminology_Doctorate ;
                                          :mentoredBy :Ethan_Hunt ;
+                                         :writtenBy :Jack_Reacher ;
                                          :hasTitle "Anatomi Kriminalitas di Amerika Serikat"^^xsd:string ;
                                          rdfs:label "Anatomi Kriminalitas di Amerika Serikat"^^xsd:string .
 
@@ -465,6 +466,7 @@ NPM: Anisha Inas Izdihar""" .
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Jack_Reacher
 :Jack_Reacher rdf:type owl:NamedIndividual ,
                        :People ;
+              :authorOf :Anatomi_Kriminalitas_di_Amerika_Serikat ;
               :completedStudy :Criminology_Doctorate ;
               :hasName "Jack Reacher"^^xsd:string ;
               rdfs:label "Jack Reacher"^^xsd:string .
