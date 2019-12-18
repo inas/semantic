@@ -18,6 +18,14 @@
               rdfs:range :StudyProgram .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#authorOf
+:authorOf rdf:type owl:ObjectProperty ;
+          owl:inverseOf :writtenBy ;
+          rdf:type owl:InverseFunctionalProperty ;
+          rdfs:domain :Author ;
+          rdfs:range :PrintCollection .
+
+
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#completedStudy
 :completedStudy rdf:type owl:ObjectProperty ;
                 rdfs:domain :People ;
@@ -26,8 +34,16 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#directedBy
 :directedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :directorOf ;
             rdfs:domain :Movie ;
             rdfs:range :Director .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#directorOf
+:directorOf rdf:type owl:ObjectProperty ,
+                     owl:InverseFunctionalProperty ;
+            rdfs:domain :Director ;
+            rdfs:range :Movie .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasCollection
@@ -48,6 +64,14 @@
             rdfs:range :Library .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasMentored
+:hasMentored rdf:type owl:ObjectProperty ;
+             owl:inverseOf :mentoredBy ;
+             rdf:type owl:InverseFunctionalProperty ;
+             rdfs:domain :Professor ;
+             rdfs:range :AcademicPaper .
+
+
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#heldBy
 :heldBy rdf:type owl:ObjectProperty ;
         rdfs:domain :StudyProgram ;
@@ -62,8 +86,16 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#producedBy
 :producedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :producerOf ;
             rdfs:domain :DigitalCollection ;
             rdfs:range :Producer .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#producerOf
+:producerOf rdf:type owl:ObjectProperty ,
+                     owl:InverseFunctionalProperty ;
+            rdfs:domain :Producer ;
+            rdfs:range :DigitalCollection .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#publishedBy
@@ -88,10 +120,10 @@
                 rdfs:range xsd:dateTime .
 
 
-###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasID
-:hasID rdf:type owl:DatatypeProperty ;
-       rdfs:domain :Collection ;
-       rdfs:range xsd:string .
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasCatalogID
+:hasCatalogID rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Collection ;
+              rdfs:range xsd:string .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasName
@@ -106,18 +138,53 @@
           rdfs:range xsd:string .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#numOfCopies
+:numOfCopies rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Collection ;
+             rdfs:range xsd:integer .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#productionYear
+:productionYear rdf:type owl:DatatypeProperty ;
+                rdfs:domain :DigitalCollection ;
+                rdfs:range xsd:dateTime .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#publishYear
+:publishYear rdf:type owl:DatatypeProperty ;
+             rdfs:domain :PrintCollection ;
+             rdfs:range xsd:dateTime .
+
+
 #################################################################
 #    Classes
 #################################################################
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#AcademicPaper
 :AcademicPaper rdf:type owl:Class ;
-               rdfs:subClassOf :PrintCollection .
+               rdfs:subClassOf :PrintCollection ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :mentoredBy ;
+                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Professor
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :writtenBy ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Author
+                               ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Author
 :Author rdf:type owl:Class ;
-        rdfs:subClassOf :People .
+        owl:equivalentClass [ owl:intersectionOf ( :People
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :authorOf ;
+                                                     owl:someValuesFrom :PrintCollection
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Book
@@ -130,8 +197,35 @@
     rdfs:subClassOf :Format .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#CollaborativeBook
+:CollaborativeBook rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :Book
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :writtenBy ;
+                                                                owl:minCardinality "2"^^xsd:nonNegativeInteger
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] .
+
+
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Collection
-:Collection rdf:type owl:Class .
+:Collection rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :numOfCopies ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:integer
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasCatalogID ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasTitle ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#DVD
@@ -141,12 +235,24 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#DigitalCollection
 :DigitalCollection rdf:type owl:Class ;
-                   rdfs:subClassOf :Collection .
+                   rdfs:subClassOf :Collection ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :producedBy ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Producer
+                                   ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Director
 :Director rdf:type owl:Class ;
-          rdfs:subClassOf :People .
+          owl:equivalentClass [ owl:intersectionOf ( :People
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :directorOf ;
+                                                       owl:someValuesFrom :Movie
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Dissertation
@@ -159,6 +265,40 @@
        rdfs:subClassOf :AcademicPaper .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#FilmMaker
+:FilmMaker rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :People
+                                                      [ rdf:type owl:Class ;
+                                                        owl:unionOf ( [ rdf:type owl:Class ;
+                                                                        owl:unionOf ( [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :directorOf ;
+                                                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :Movie
+                                                                                      ]
+                                                                                      [ rdf:type owl:Restriction ;
+                                                                                        owl:onProperty :producerOf ;
+                                                                                        owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                        owl:onClass :Movie
+                                                                                      ]
+                                                                                    )
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :directorOf ;
+                                                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass :Movie
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :producerOf ;
+                                                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass :Movie
+                                                                      ]
+                                                                    )
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] .
+
+
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Format
 :Format rdf:type owl:Class .
 
@@ -169,7 +309,12 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Movie
 :Movie rdf:type owl:Class ;
-       rdfs:subClassOf :DigitalCollection .
+       rdfs:subClassOf :DigitalCollection ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :directedBy ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Director
+                       ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Music
@@ -178,21 +323,51 @@
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#People
-:People rdf:type owl:Class .
+:People rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasName ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#PrintCollection
 :PrintCollection rdf:type owl:Class ;
-                 rdfs:subClassOf :Collection .
+                 rdfs:subClassOf :Collection ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :publishedBy ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Publisher
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :writtenBy ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Author
+                                 ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Producer
 :Producer rdf:type owl:Class ;
-          rdfs:subClassOf :People .
+          owl:equivalentClass [ owl:intersectionOf ( :People
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :producerOf ;
+                                                       owl:someValuesFrom :DigitalCollection
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Professor
-:Professor rdf:type owl:Class .
+:Professor rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :People
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :hasMentored ;
+                                                        owl:someValuesFrom :AcademicPaper
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Publisher
