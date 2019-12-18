@@ -1,0 +1,493 @@
+@prefix : <http://sw.fasilkomui.org/AnishaInasIzdihar/onto#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://sw.fasilkomui.org/AnishaInasIzdihar/onto> .
+
+<http://sw.fasilkomui.org/AnishaInasIzdihar/onto> rdf:type owl:Ontology ;
+                                                   rdfs:comment """Name: Anisha Inas Izdihar
+NPM: Anisha Inas Izdihar""" .
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#affiliatedTo
+:affiliatedTo rdf:type owl:ObjectProperty ;
+              rdfs:domain :AcademicPaper ;
+              rdfs:range :StudyProgram .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#authorOf
+:authorOf rdf:type owl:ObjectProperty ;
+          owl:inverseOf :writtenBy ;
+          rdfs:domain :Author ;
+          rdfs:range :PrintCollection .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#completedStudy
+:completedStudy rdf:type owl:ObjectProperty ;
+                rdfs:domain :People ;
+                rdfs:range :StudyProgram .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#directedBy
+:directedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :directorOf ;
+            rdfs:domain :Movie ;
+            rdfs:range :Director .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#directorOf
+:directorOf rdf:type owl:ObjectProperty ;
+            rdfs:domain :Director ;
+            rdfs:range :Movie .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasCollection
+:hasCollection rdf:type owl:ObjectProperty ;
+               rdfs:domain :Library ;
+               rdfs:range :Collection .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasFormat
+:hasFormat rdf:type owl:ObjectProperty ;
+           rdfs:domain :DigitalCollection ;
+           rdfs:range :Format .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasLibrary
+:hasLibrary rdf:type owl:ObjectProperty ;
+            rdfs:domain :University ;
+            rdfs:range :Library .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasMentored
+:hasMentored rdf:type owl:ObjectProperty ;
+             owl:inverseOf :mentoredBy ;
+             rdfs:domain :Professor ;
+             rdfs:range :AcademicPaper .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#heldBy
+:heldBy rdf:type owl:ObjectProperty ;
+        rdfs:domain :StudyProgram ;
+        rdfs:range :University .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#mentoredBy
+:mentoredBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :AcademicPaper ;
+            rdfs:range :Professor .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#producedBy
+:producedBy rdf:type owl:ObjectProperty ;
+            owl:inverseOf :producerOf ;
+            rdfs:domain :DigitalCollection ;
+            rdfs:range :Producer .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#producerOf
+:producerOf rdf:type owl:ObjectProperty ;
+            rdfs:domain :Producer ;
+            rdfs:range :DigitalCollection .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#publishedBy
+:publishedBy rdf:type owl:ObjectProperty ;
+             rdfs:domain :PrintCollection ;
+             rdfs:range :Publisher .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#writtenBy
+:writtenBy rdf:type owl:ObjectProperty ;
+           rdfs:domain :PrintCollection ;
+           rdfs:range :Author .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#graduationYear
+:graduationYear rdf:type owl:DatatypeProperty ;
+                rdfs:domain :StudyProgram ;
+                rdfs:range xsd:dateTime .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasCatalogID
+:hasCatalogID rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Collection ;
+              rdfs:range xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasName
+:hasName rdf:type owl:DatatypeProperty ;
+         rdfs:domain :People ;
+         rdfs:range xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasTitle
+:hasTitle rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Collection ;
+          rdfs:range xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#numOfCopies
+:numOfCopies rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Collection ;
+             rdfs:range xsd:integer .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#productionYear
+:productionYear rdf:type owl:DatatypeProperty ;
+                rdfs:domain :DigitalCollection ;
+                rdfs:range xsd:dateTime .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#publishYear
+:publishYear rdf:type owl:DatatypeProperty ;
+             rdfs:domain :PrintCollection ;
+             rdfs:range xsd:dateTime .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#AcademicPaper
+:AcademicPaper rdf:type owl:Class ;
+               rdfs:subClassOf :PrintCollection ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :mentoredBy ;
+                                 owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Professor
+                               ] ,
+                               [ rdf:type owl:Restriction ;
+                                 owl:onProperty :writtenBy ;
+                                 owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                 owl:onClass :Author
+                               ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Author
+:Author rdf:type owl:Class ;
+        owl:equivalentClass [ owl:intersectionOf ( :People
+                                                   [ rdf:type owl:Restriction ;
+                                                     owl:onProperty :authorOf ;
+                                                     owl:someValuesFrom :PrintCollection
+                                                   ]
+                                                 ) ;
+                              rdf:type owl:Class
+                            ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Book
+:Book rdf:type owl:Class ;
+      rdfs:subClassOf :PrintCollection .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#CD
+:CD rdf:type owl:Class ;
+    rdfs:subClassOf :Format .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#CollaborativeBook
+:CollaborativeBook rdf:type owl:Class ;
+                   owl:equivalentClass [ owl:intersectionOf ( :Book
+                                                              [ rdf:type owl:Restriction ;
+                                                                owl:onProperty :writtenBy ;
+                                                                owl:minCardinality "2"^^xsd:nonNegativeInteger
+                                                              ]
+                                                            ) ;
+                                         rdf:type owl:Class
+                                       ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Collection
+:Collection rdf:type owl:Class ;
+            rdfs:subClassOf [ rdf:type owl:Restriction ;
+                              owl:onProperty :numOfCopies ;
+                              owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:integer
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasCatalogID ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] ,
+                            [ rdf:type owl:Restriction ;
+                              owl:onProperty :hasTitle ;
+                              owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                              owl:onDataRange xsd:string
+                            ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#DVD
+:DVD rdf:type owl:Class ;
+     rdfs:subClassOf :Format .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#DigitalCollection
+:DigitalCollection rdf:type owl:Class ;
+                   rdfs:subClassOf :Collection ,
+                                   [ rdf:type owl:Restriction ;
+                                     owl:onProperty :producedBy ;
+                                     owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                     owl:onClass :Producer
+                                   ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Director
+:Director rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :People
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :directorOf ;
+                                                       owl:someValuesFrom :Movie
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Dissertation
+:Dissertation rdf:type owl:Class ;
+              rdfs:subClassOf :AcademicPaper .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Essay
+:Essay rdf:type owl:Class ;
+       rdfs:subClassOf :AcademicPaper .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#FilmMaker
+:FilmMaker rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :People
+                                                      [ rdf:type owl:Class ;
+                                                        owl:unionOf ( [ owl:intersectionOf ( [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty :directorOf ;
+                                                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                               owl:onClass :Movie
+                                                                                             ]
+                                                                                             [ rdf:type owl:Restriction ;
+                                                                                               owl:onProperty :producerOf ;
+                                                                                               owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                                                                               owl:onClass :Movie
+                                                                                             ]
+                                                                                           ) ;
+                                                                        rdf:type owl:Class
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :directorOf ;
+                                                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass :Movie
+                                                                      ]
+                                                                      [ rdf:type owl:Restriction ;
+                                                                        owl:onProperty :producerOf ;
+                                                                        owl:minQualifiedCardinality "2"^^xsd:nonNegativeInteger ;
+                                                                        owl:onClass :Movie
+                                                                      ]
+                                                                    )
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Format
+:Format rdf:type owl:Class .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Library
+:Library rdf:type owl:Class .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Movie
+:Movie rdf:type owl:Class ;
+       rdfs:subClassOf :DigitalCollection ,
+                       [ rdf:type owl:Restriction ;
+                         owl:onProperty :directedBy ;
+                         owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                         owl:onClass :Director
+                       ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Music
+:Music rdf:type owl:Class ;
+       rdfs:subClassOf :DigitalCollection .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#People
+:People rdf:type owl:Class ;
+        rdfs:subClassOf [ rdf:type owl:Restriction ;
+                          owl:onProperty :hasName ;
+                          owl:qualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                          owl:onDataRange xsd:string
+                        ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#PrintCollection
+:PrintCollection rdf:type owl:Class ;
+                 rdfs:subClassOf :Collection ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :publishedBy ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Publisher
+                                 ] ,
+                                 [ rdf:type owl:Restriction ;
+                                   owl:onProperty :writtenBy ;
+                                   owl:minQualifiedCardinality "1"^^xsd:nonNegativeInteger ;
+                                   owl:onClass :Author
+                                 ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Producer
+:Producer rdf:type owl:Class ;
+          owl:equivalentClass [ owl:intersectionOf ( :People
+                                                     [ rdf:type owl:Restriction ;
+                                                       owl:onProperty :producerOf ;
+                                                       owl:someValuesFrom :DigitalCollection
+                                                     ]
+                                                   ) ;
+                                rdf:type owl:Class
+                              ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Professor
+:Professor rdf:type owl:Class ;
+           owl:equivalentClass [ owl:intersectionOf ( :People
+                                                      [ rdf:type owl:Restriction ;
+                                                        owl:onProperty :hasMentored ;
+                                                        owl:someValuesFrom :AcademicPaper
+                                                      ]
+                                                    ) ;
+                                 rdf:type owl:Class
+                               ] .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Publisher
+:Publisher rdf:type owl:Class .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#StudyProgram
+:StudyProgram rdf:type owl:Class .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Thesis
+:Thesis rdf:type owl:Class ;
+        rdfs:subClassOf :AcademicPaper .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#University
+:University rdf:type owl:Class .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#A_Beautiful_Mind
+:A_Beautiful_Mind rdf:type owl:NamedIndividual ,
+                           :Movie ;
+                  :directedBy :Ron_Howard ;
+                  :hasFormat :DVD ;
+                  :producedBy :Brian_Grazer ,
+                              :Ron_Howard ;
+                  :hasTitle "A Beautiful Mind"^^xsd:string ;
+                  :numOfCopies 7 ;
+                  rdfs:label "A Beautiful Mind"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#A_Game_of_Thrones
+:A_Game_of_Thrones rdf:type owl:NamedIndividual ,
+                            :Book ;
+                   :publishedBy :Bantam_Spectra ;
+                   :writtenBy :George_R.R._Martin ;
+                   :hasTitle "A Game of Thrones" ;
+                   :numOfCopies 5 ;
+                   rdfs:label "A Game of Thrones" .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Anatomi_Kriminalitas_di_Amerika_Serikat
+:Anatomi_Kriminalitas_di_Amerika_Serikat rdf:type owl:NamedIndividual ,
+                                                  :Dissertation ;
+                                         :affiliatedTo :Criminology_Doctorate ;
+                                         :mentoredBy :Ethan_Hunt ;
+                                         :hasTitle "Anatomi Kriminalitas di Amerika Serikat"^^xsd:string ;
+                                         rdfs:label "Anatomi Kriminalitas di Amerika Serikat"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Bantam_Spectra
+:Bantam_Spectra rdf:type owl:NamedIndividual ,
+                         :Publisher ;
+                rdfs:label "Bantam Spectra" .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Brian_Grazer
+:Brian_Grazer rdf:type owl:NamedIndividual ,
+                       :People ;
+              :producerOf :A_Beautiful_Mind ;
+              :hasName "Brian Grazer"^^xsd:string ;
+              rdfs:label "Brian Grazer"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Criminology_Doctorate
+:Criminology_Doctorate rdf:type owl:NamedIndividual ,
+                                :StudyProgram ;
+                       :heldBy :University ;
+                       :graduationYear "2015-01-01T00:00:00"^^xsd:dateTime ;
+                       rdfs:label "Criminology Doctorate"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#DVD
+:DVD rdf:type owl:NamedIndividual ,
+              :DVD .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Ethan_Hunt
+:Ethan_Hunt rdf:type owl:NamedIndividual ,
+                     :People ;
+            :hasMentored :Anatomi_Kriminalitas_di_Amerika_Serikat ;
+            :hasName "Ethan Hunt"^^xsd:string ;
+            rdfs:label "Ethan Hunt"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#George_R.R._Martin
+:George_R.R._Martin rdf:type owl:NamedIndividual ,
+                             :People ;
+                    :hasName "George R.R. Martin"^^xsd:string ;
+                    rdfs:label "George R.R. Martin"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Jack_Reacher
+:Jack_Reacher rdf:type owl:NamedIndividual ,
+                       :People ;
+              :completedStudy :Criminology_Doctorate ;
+              :hasName "Jack Reacher"^^xsd:string ;
+              rdfs:label "Jack Reacher"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Library
+:Library rdf:type owl:NamedIndividual ,
+                  :Library .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Ron_Howard
+:Ron_Howard rdf:type owl:NamedIndividual ,
+                     :People ;
+            :directorOf :A_Beautiful_Mind ;
+            :producerOf :A_Beautiful_Mind ;
+            :hasName "Ron Howard"^^xsd:string ;
+            rdfs:label "Ron Howard"^^xsd:string .
+
+
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#University
+:University rdf:type owl:NamedIndividual ,
+                     :University ;
+            :hasLibrary :Library .
+
+
+###  Generated by the OWL API (version 4.5.9.2019-02-01T07:24:44Z) https://github.com/owlcs/owlapi
