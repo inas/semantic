@@ -14,57 +14,68 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#affiliatedTo
 :affiliatedTo rdf:type owl:ObjectProperty ;
-              rdfs:subPropertyOf owl:topObjectProperty .
+              rdfs:domain :AcademicPaper ;
+              rdfs:range :StudyProgram .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#completedStudy
 :completedStudy rdf:type owl:ObjectProperty ;
-                rdfs:subPropertyOf owl:topObjectProperty .
+                rdfs:domain :People ;
+                rdfs:range :StudyProgram .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#directedBy
 :directedBy rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty .
+            rdfs:domain :Movie ;
+            rdfs:range :Director .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasCollection
 :hasCollection rdf:type owl:ObjectProperty ;
-               rdfs:subPropertyOf owl:topObjectProperty .
+               rdfs:domain :Library ;
+               rdfs:range :Collection .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasFormat
 :hasFormat rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf owl:topObjectProperty .
+           rdfs:domain :DigitalCollection ;
+           rdfs:range :Format .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasLibrary
 :hasLibrary rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty .
+            rdfs:domain :University ;
+            rdfs:range :Library .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#heldBy
 :heldBy rdf:type owl:ObjectProperty ;
-        rdfs:subPropertyOf owl:topObjectProperty .
+        rdfs:domain :StudyProgram ;
+        rdfs:range :University .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#mentoredBy
 :mentoredBy rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty .
+            rdfs:domain :AcademicPaper ;
+            rdfs:range :Professor .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#producedBy
 :producedBy rdf:type owl:ObjectProperty ;
-            rdfs:subPropertyOf owl:topObjectProperty .
+            rdfs:domain :DigitalCollection ;
+            rdfs:range :Producer .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#publishedBy
 :publishedBy rdf:type owl:ObjectProperty ;
-             rdfs:subPropertyOf owl:topObjectProperty .
+             rdfs:domain :PrintCollection ;
+             rdfs:range :Publisher .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#writtenBy
 :writtenBy rdf:type owl:ObjectProperty ;
-           rdfs:subPropertyOf owl:topObjectProperty .
+           rdfs:domain :PrintCollection ;
+           rdfs:range :Author .
 
 
 #################################################################
@@ -73,31 +84,35 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#graduationYear
 :graduationYear rdf:type owl:DatatypeProperty ;
-                rdfs:subPropertyOf owl:topDataProperty .
+                rdfs:domain :StudyProgram ;
+                rdfs:range xsd:dateTime .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasID
 :hasID rdf:type owl:DatatypeProperty ;
-       rdfs:subPropertyOf owl:topDataProperty .
+       rdfs:domain :Collection ;
+       rdfs:range xsd:string .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasName
 :hasName rdf:type owl:DatatypeProperty ;
-         rdfs:subPropertyOf owl:topDataProperty .
+         rdfs:domain :People ;
+         rdfs:range xsd:string .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#hasTitle
 :hasTitle rdf:type owl:DatatypeProperty ;
-          rdfs:subPropertyOf owl:topDataProperty .
+          rdfs:domain :Collection ;
+          rdfs:range xsd:string .
 
 
 #################################################################
 #    Classes
 #################################################################
 
-###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Academic_Paper
-:Academic_Paper rdf:type owl:Class ;
-                rdfs:subClassOf :PrintCollection .
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#AcademicPaper
+:AcademicPaper rdf:type owl:Class ;
+               rdfs:subClassOf :PrintCollection .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Author
@@ -136,12 +151,12 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Dissertation
 :Dissertation rdf:type owl:Class ;
-              rdfs:subClassOf :Academic_Paper .
+              rdfs:subClassOf :AcademicPaper .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Essay
 :Essay rdf:type owl:Class ;
-       rdfs:subClassOf :Academic_Paper .
+       rdfs:subClassOf :AcademicPaper .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Format
@@ -176,6 +191,10 @@
           rdfs:subClassOf :People .
 
 
+###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Professor
+:Professor rdf:type owl:Class .
+
+
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Publisher
 :Publisher rdf:type owl:Class .
 
@@ -186,7 +205,7 @@
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#Thesis
 :Thesis rdf:type owl:Class ;
-        rdfs:subClassOf :Academic_Paper .
+        rdfs:subClassOf :AcademicPaper .
 
 
 ###  http://sw.fasilkomui.org/AnishaInasIzdihar/onto#University
